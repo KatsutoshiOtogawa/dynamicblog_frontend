@@ -21,7 +21,7 @@ ReactDOM.render(
       <App />
       <Switch>
         <Route
-            path = "/Tarent/:id"
+            path = "/tarent/:id"
             component = {TarentDetail}
           />
       </Switch>

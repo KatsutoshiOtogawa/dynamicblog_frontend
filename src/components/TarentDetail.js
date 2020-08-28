@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchTarentDetail} from '../actions/TarentDetailActions'
+import { Link } from 'react-router-dom'
 
 class TarentDetail extends Component{
 
@@ -18,40 +19,26 @@ class TarentDetail extends Component{
             first_rome_name: null,
             charm_point: null,
             birth_date: null,
-            tarent_personality_name: null,
+            tarent_personality_id: [],
+            tarent_personality_name: [],
+            tarent_face_id: [],
             tarent_face_name: [],
-            tarent_body_name: null,
-            tarent_upper_body_name: null,
-            tarent_lower_body_name: null,
-            tarent_bra_size_name: null,
+            tarent_body_id: [],
+            tarent_body_name: [],
+            tarent_upperbody_id: [],
+            tarent_upperbody_name: [],
+            tarent_lowerbody_id: [],
+            tarent_lowerbody_name: [],
+            tarent_art_id: [],
+            tarent_art_name: [],
+            tarent_site_url: [],
+            site_type_name: [],
         }
     }
 
     componentDidMount(){
         const id =  parseInt(this.props.match.params.id);
 
-        /*
-        this.props.fetchTarentDetail(id);
-        const TarentDetail = this.state.tarent_detail
-        this.setState({
-            id: TarentDetail.id,
-            stage_name:TarentDetail.stage_name,
-            family_name:TarentDetail.family_name,
-            first_name:TarentDetail.first_name,
-            family_katakana_name:TarentDetail.family_katakana_name,
-            first_katakana_name:TarentDetail.first_katakana_name,
-            family_rome_name:TarentDetail.family_rome_name,
-            first_rome_name:TarentDetail.first_rome_name,
-            charm_point:TarentDetail.charm_point,
-            birth_date:TarentDetail.birth_date,
-            tarent_personality:TarentDetail.tarent_personality,
-            tarent_face:TarentDetail.tarent_face,
-            tarent_body:TarentDetail.tarent_body,
-            tarent_upper_body:TarentDetail.tarent_upper_body,
-            tarent_lower_body:TarentDetail.tarent_lower_body,
-            tarent_bra_size:TarentDetail.tarent_bra_size,
-        });
-        */
         fetch(`http://127.0.0.1:8080/api/tarent/${id}/`)
         .then((res) => res.json())
         .then((data) => {
@@ -67,12 +54,22 @@ class TarentDetail extends Component{
                 first_rome_name: data.first_rome_name,
                 charm_point: data.charm_point,
                 birth_date: data.birth_date,
+                tarent_personality_id: data.tarent_personality_id,
                 tarent_personality_name: data.tarent_personality_name,
+                tarent_face_id: data.tarent_face_id,
                 tarent_face_name: data.tarent_face_name,
+                tarent_body_id: data.tarent_body_id,
                 tarent_body_name: data.tarent_body_name,
-                tarent_upper_body_name: data.tarent_upper_body_name,
-                tarent_lower_body_name: data.tarent_lower_body_name,
-                tarent_bra_size_name: data.tarent_bra_size_name,
+                tarent_upperbody_id: data.tarent_upperbody_id,
+                tarent_upperbody_name: data.tarent_upperbody_name,
+                tarent_lowerbody_id: data.tarent_lowerbody_id,
+                tarent_lowerbody_name: data.tarent_lowerbody_name,
+                tarent_brasize_id: data.tarent_brasize_id,
+                tarent_brasize_name: data.tarent_brasize_name,
+                tarent_art_id: data.tarent_art_id,
+                tarent_art_name: data.tarent_art_name,
+                tarent_site_url: data.tarent_site_url,
+                site_type_name: data.site_type_name,
             })
 
         })
@@ -89,23 +86,93 @@ class TarentDetail extends Component{
                 <h2>{this.state.stage_name}</h2>
                 <h3>レビュー</h3>
                 <h4>良い点<span role="img" aria-label="donut">👍</span></h4>
-                {this.state.tarent_bra_size_name}
                 <h5>顔の傾向</h5>
-                {this.state.tarent_face_name[0]}
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_face_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_face/${this.state.tarent_face_id[i]}`}>{this.state.tarent_face_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
+                <h5>体格</h5>
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_body_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_body/${this.state.tarent_body_id[i]}`}>{this.state.tarent_body_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_upperbody_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_upperbody/${this.state.tarent_upperbody_id[i]}`}>{this.state.tarent_upperbody_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_lowerbody_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_lowerbody/${this.state.tarent_lowerbody_id[i]}`}>{this.state.tarent_lowerbody_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
+                <h5>性格</h5>
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_personality_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_personality/${this.state.tarent_personality_id[i]}`}>{this.state.tarent_personality_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
+                <h5>バストサイズ</h5>
+                <Link to={`/tarent_brasize/${this.state.tarent_brasize_id}`}>{this.state.tarent_brasize_name}カップ</Link>
+                
                 <h4>他サイトのレビュー<span role="img" aria-label="donut">📖</span></h4>
-                {this.state.stage_name}
                 <h5>twitter<span role="img" aria-label="donut">🐦</span></h5>
                 <h5>instagram<span role="img" aria-label="donut">📷</span></h5>
                 <h5>youtube<span role="img" aria-label="donut">🎬</span></h5>
                 <h3>経歴</h3>
                 <h3>SNS<span role="img" aria-label="donut">👀</span></h3>
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_site_url.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={this.state.tarent_site_url[i]}>{this.state.site_type_name[i]}本人アカウント</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
                 <h3>タイムライン<span>⏱</span></h3>
                     <a href='https://petnanukidol.blog.fc2.com/blog-entry-70.html'>この娘のタイムライン</a>
                 <h3>出演作品<span role="img" aria-label="donut">🎨</span></h3>
                 <div>
-                    <ul>
-                        <li></li>
-                    </ul>
+                
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_art_id.length; i++) {
+                        items.push
+                        (<li>
+                            <Link to={`/tarent_art/${this.state.tarent_art_id[i]}`}>{this.state.tarent_art_name[i]}</Link>
+                        </li>)
+                    }
+                    return <ul>{items}</ul>;
+                })()}
                 </div>
             </>
         );
@@ -130,12 +197,22 @@ const mapStateToProps = (state) => {
         first_rome_name: state.first_rome_name,
         charm_point: state.charm_point,
         birth_date: state.birth_date,
+        tarent_personality_id: state.tarent_personality_id,
         tarent_personality_name: state.tarent_personality_name,
+        tarent_face_id: state.tarent_face_id,
         tarent_face_name: state.tarent_face_name,
+        tarent_body_id: state.tarent_body_id,
         tarent_body_name: state.tarent_body_name,
-        tarent_upper_body_name: state.tarent_upper_body_name,
-        tarent_lower_body_name: state.tarent_lower_body_name,
-        tarent_bra_size_name: state.tarent_bra_size_name,
+        tarent_upperbody_id: state.tarent_upperbody_id,
+        tarent_upperbody_name: state.tarent_upperbody_name,
+        tarent_lowerbody_id: state.tarent_lowerbody_id,
+        tarent_lowerbody_name: state.tarent_lowerbody_name,
+        tarent_brasize_id: state.tarent_brasize_id,
+        tarent_brasize_name: state.tarent_brasize_name,
+        tarent_art_id: state.tarent_art_id,
+        tarent_art_name: state.tarent_art_name,
+        tarent_site_url: state.tarent_site_url,
+        site_type_name: state.site_type_name,
     }
 }
 
