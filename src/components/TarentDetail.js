@@ -35,10 +35,13 @@ class TarentDetail extends Component{
             tarent_art_name: [],
             tarent_site_url: [],
             site_type_name: [],
-            tarent_info_site_embed_html: [],
-            tarent_info_site_embed_url: [],
-            tarent_info_site_type_name: [],
-            
+            twitter_embed_html: [],
+            twitter_embed_url: [],
+            instagram_embed_html: [],
+            instagram_embed_url: [],
+            youtube_embed_html: [],
+            youtube_embed_url: [],
+
         }
     }
 
@@ -76,10 +79,12 @@ class TarentDetail extends Component{
                 tarent_art_name: data.tarent_art_name,
                 tarent_site_url: data.tarent_site_url,
                 site_type_name: data.site_type_name,
-                tarent_info_site_embed_html: data.tarent_info_site_embed_html,
-                tarent_info_site_embed_url: data.tarent_info_site_embed_url,
-                tarent_info_site_type_name: data.tarent_info_site_type_name,
-
+                twitter_embed_html: data.twitter_embed_html,
+                twitter_embed_url: data.twitter_embed_url,
+                instagram_embed_html: data.instagram_embed_html,
+                instagram_embed_url: data.instagram_embed_url,
+                youtube_embed_html: data.youtube_embed_html,
+                youtube_embed_url: data.youtube_embed_url,
             })
 
         })
@@ -153,30 +158,57 @@ class TarentDetail extends Component{
                 
                 <h4>他サイトのレビュー<span role="img" aria-label="donut">📖</span></h4>
                 <h5>twitter<span role="img" aria-label="donut">🐦</span></h5>
+                {(() => {
+                    if(this.state.twitter_embed_html != null){
+                        const items = [];
+                        
+                        for (let i = 0; i < this.state.twitter_embed_html.length; i++) {
+                            items.push
+                            (
+                                this.state.twitter_embed_html[i]
+                            )
+                        }
+                        return <div dangerouslySetInnerHTML={{__html: items}}></div>
+                    }
+                })()}
                 <h5>instagram<span role="img" aria-label="donut">📷</span></h5>
                 {(() => {
-                    const items = [];
-                    for (let i = 0; i < this.state.tarent_info_site_embed_url.length; i++) {
-                        items.push
-                        (
-                            
-                            <InstagramEmbed
-                                url={this.state.tarent_info_site_embed_url[i]}
-                                hideCaption={false}
-                                containerTagName='div'
-                                protocol=''
-                                injectScript
-                                onLoading={() => {}}
-                                onSuccess={() => {}}
-                                onAfterRender={() => {}}
-                                onFailure={() => {}}
-                            />
-                        )
+                    if(this.state.instagram_embed_url != null){
+                        const items = [];
+                        for (let i = 0; i < this.state.instagram_embed_url.length; i++) {
+                            items.push
+                            (
+                                
+                                <InstagramEmbed
+                                    url={this.state.instagram_embed_url[i]}
+                                    hideCaption={false}
+                                    containerTagName='div'
+                                    protocol=''
+                                    injectScript
+                                    onLoading={() => {}}
+                                    onSuccess={() => {}}
+                                    onAfterRender={() => {}}
+                                    onFailure={() => {}}
+                                />
+                            )
+                        }
+                        return <div>{items}</div>
                     }
-                    return <div>{items}</div>
                 })()}
                 
                 <h5>youtube<span role="img" aria-label="donut">🎬</span></h5>
+                {(() => {
+                    if(this.state.youtube_embed_html != null){
+                        const items = [];
+                        for (let i = 0; i < this.state.youtube_embed_html.length; i++) {
+                            items.push
+                            (
+                                this.state.youtube_embed_html[i]
+                            )
+                        }
+                        return <div dangerouslySetInnerHTML={{__html: items}}></div>
+                    }
+                })()}
                 <h3>経歴</h3>
                 <h3>SNS<span role="img" aria-label="donut">👀</span></h3>
                 {(() => {
