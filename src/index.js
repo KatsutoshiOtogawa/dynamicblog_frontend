@@ -1,13 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter,Route, Switch} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
+import TarentDetailReducer from './reducers/TarentDetailReducer';
+import thunk from 'redux-thunk';
+import TarentDetail from './components/TarentDetail'
+
+const store = createStore(
+  TarentDetailReducer,
+  applyMiddleware(thunk)
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+      <Switch>
+        <Route
+            path = "/Tarent/:id"
+            component = {TarentDetail}
+          />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
