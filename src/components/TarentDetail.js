@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchTarentDetail} from '../actions/TarentDetailActions'
 import { Link } from 'react-router-dom'
+import InstagramEmbed from 'react-instagram-embed';
+
 
 class TarentDetail extends Component{
 
@@ -33,6 +35,10 @@ class TarentDetail extends Component{
             tarent_art_name: [],
             tarent_site_url: [],
             site_type_name: [],
+            tarent_info_site_embed_html: [],
+            tarent_info_site_embed_url: [],
+            tarent_info_site_type_name: [],
+            
         }
     }
 
@@ -70,6 +76,10 @@ class TarentDetail extends Component{
                 tarent_art_name: data.tarent_art_name,
                 tarent_site_url: data.tarent_site_url,
                 site_type_name: data.site_type_name,
+                tarent_info_site_embed_html: data.tarent_info_site_embed_html,
+                tarent_info_site_embed_url: data.tarent_info_site_embed_url,
+                tarent_info_site_type_name: data.tarent_info_site_type_name,
+
             })
 
         })
@@ -78,8 +88,7 @@ class TarentDetail extends Component{
         )
         
     }
-
-
+    
     render(){
         return(
             <>
@@ -145,6 +154,28 @@ class TarentDetail extends Component{
                 <h4>他サイトのレビュー<span role="img" aria-label="donut">📖</span></h4>
                 <h5>twitter<span role="img" aria-label="donut">🐦</span></h5>
                 <h5>instagram<span role="img" aria-label="donut">📷</span></h5>
+                {(() => {
+                    const items = [];
+                    for (let i = 0; i < this.state.tarent_info_site_embed_url.length; i++) {
+                        items.push
+                        (
+                            
+                            <InstagramEmbed
+                                url={this.state.tarent_info_site_embed_url[i]}
+                                hideCaption={false}
+                                containerTagName='div'
+                                protocol=''
+                                injectScript
+                                onLoading={() => {}}
+                                onSuccess={() => {}}
+                                onAfterRender={() => {}}
+                                onFailure={() => {}}
+                            />
+                        )
+                    }
+                    return <div>{items}</div>
+                })()}
+                
                 <h5>youtube<span role="img" aria-label="donut">🎬</span></h5>
                 <h3>経歴</h3>
                 <h3>SNS<span role="img" aria-label="donut">👀</span></h3>
