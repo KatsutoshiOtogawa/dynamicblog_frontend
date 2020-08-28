@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 import TarentDetailReducer from './reducers/TarentDetailReducer';
 import thunk from 'redux-thunk';
 import TarentDetail from './components/TarentDetail'
+import TarentBraSize from './components/TarentBraSize'
 
 const store = createStore(
   TarentDetailReducer,
@@ -23,7 +24,11 @@ ReactDOM.render(
         <Route
             path = "/tarent/:id"
             component = {TarentDetail}
-          />
+        />
+        <Route
+            path = "/tarent_bra_size/:id"
+            component = {TarentBraSize}
+        />
       </Switch>
     </BrowserRouter>
   </Provider>,
