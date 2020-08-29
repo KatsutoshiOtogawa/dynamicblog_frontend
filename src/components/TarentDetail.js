@@ -156,32 +156,19 @@ class TarentDetail extends Component{
                 <h4>他サイトのレビュー<span role="img" aria-label="donut">📖</span></h4>
                 <h5>twitter<span role="img" aria-label="donut">🐦</span></h5>
                 {(() => {
-                    if(this.state.twitter_embed_html != null){
-                        const items = [];
-                        
-                        for (let i = 0; i < this.state.twitter_embed_html.length; i++) {
-                            items.push
-                            (
-                                this.state.twitter_embed_html[i]
-                            )
-                        }
-                        return <div dangerouslySetInnerHTML={{__html: items}}></div>
-                    }
-                })()}
-                {(() => {
                     if(this.state.twitter_embed_url != null){
                         const items = [];
                         
                         for (let i = 0; i < this.state.twitter_embed_url.length; i++) {
+                            // twitter のtweetIdはurlの最後になる。
                             items.push
                             (
-                                <Tweet tweetId={this.state.twitter_embed_url[i].slice(-1)[0]} />
+                                <Tweet tweetId={this.state.twitter_embed_url[i].split('/').slice(-1)[0]} />
                             )
                         }
                         return <div>{items}</div>
                     }
                 })()}
-
                 <h5>instagram<span role="img" aria-label="donut">📷</span></h5>
                 {(() => {
                     if(this.state.instagram_embed_url != null){
