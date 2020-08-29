@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom'
-
+import { Tweet } from 'react-twitter-widgets'
 
 class TarentTimeline extends Component{
 
@@ -8,28 +8,27 @@ class TarentTimeline extends Component{
     constructor(props){
         super(props);
         this.state = {
-            id: null,
-            tarent_face_name: null,
-            tarent_face_memo: null,
-            tarent_id: [],
-            tarent_stage_name: [],
-
+            tarent_id: null,
+            tarent_stage_name: null,
+            twitter_embed_url: [],
+            instagram_embed_url: [],
+            youtube_embed_url: [],
         }
     }
 
     componentDidMount(){
-        const tarent_id =  parseInt(this.props.match.params.id);
+        const tarent_id =  parseInt(this.props.match.params.tarent_id);
 
         fetch(`http://127.0.0.1:8080/api/tarent_time_line/${tarent_id}/`)
         .then((res) => res.json())
         .then((data) => {
 
             this.setState({
-                id: data.id,
-                tarent_face_name: data.tarent_face_name,
-                tarent_face_memo: data.tarent_face_memo,
                 tarent_id: data.tarent_id,
                 tarent_stage_name: data.tarent_stage_name,
+                twitter_embed_url: data.twitter_embed_url,
+                instagram_embed_url: data.instagram_embed_url,
+                youtube_embed_url: data.youtube_embed_url,
             })
 
         })
@@ -42,8 +41,13 @@ class TarentTimeline extends Component{
     render(){
         return(
             <>
-                <h2>{this.state.tarent_face_name}</h2>
-                <div dangerouslySetInnerHTML={{__html: this.state.tarent_face_memo}}></div>
+                <h2>{this.state.tarent_stage_name}のタイムライン</h2>
+                <h3>twitter🐦</h3>
+                <h3>instagram📷</h3>
+                <h3>youtube🎬</h3>
+                <h3>この娘😘💕をもっと見👀たい、知りたい🤤</h3>
+                <a href="https://petnanukidol.blog.fc2.com/blog-entry-7.html">この娘の活動内容、SNS</a>
+                
                 {(() => {
                     if(this.state.tarent_stage_name != null){
                         const items = [];
