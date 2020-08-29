@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {fetchTarentDetail} from '../actions/TarentDetailActions'
 import { Link } from 'react-router-dom'
 import InstagramEmbed from 'react-instagram-embed';
-
+import ReactPlayer from 'react-player/lazy'
+import { Tweet } from 'react-twitter-widgets'
 
 class TarentDetail extends Component{
 
@@ -37,9 +38,7 @@ class TarentDetail extends Component{
             site_type_name: [],
             twitter_embed_html: [],
             twitter_embed_url: [],
-            instagram_embed_html: [],
             instagram_embed_url: [],
-            youtube_embed_html: [],
             youtube_embed_url: [],
 
         }
@@ -81,9 +80,7 @@ class TarentDetail extends Component{
                 site_type_name: data.site_type_name,
                 twitter_embed_html: data.twitter_embed_html,
                 twitter_embed_url: data.twitter_embed_url,
-                instagram_embed_html: data.instagram_embed_html,
                 instagram_embed_url: data.instagram_embed_url,
-                youtube_embed_html: data.youtube_embed_html,
                 youtube_embed_url: data.youtube_embed_url,
             })
 
@@ -171,6 +168,20 @@ class TarentDetail extends Component{
                         return <div dangerouslySetInnerHTML={{__html: items}}></div>
                     }
                 })()}
+                {(() => {
+                    if(this.state.twitter_embed_url != null){
+                        const items = [];
+                        
+                        for (let i = 0; i < this.state.twitter_embed_url.length; i++) {
+                            items.push
+                            (
+                                <Tweet tweetId={this.state.twitter_embed_url[i].slice(-1)[0]} />
+                            )
+                        }
+                        return <div>{items}</div>
+                    }
+                })()}
+
                 <h5>instagram<span role="img" aria-label="donut">📷</span></h5>
                 {(() => {
                     if(this.state.instagram_embed_url != null){
@@ -198,17 +209,19 @@ class TarentDetail extends Component{
                 
                 <h5>youtube<span role="img" aria-label="donut">🎬</span></h5>
                 {(() => {
-                    if(this.state.youtube_embed_html != null){
+                    if(this.state.youtube_embed_url != null){
                         const items = [];
-                        for (let i = 0; i < this.state.youtube_embed_html.length; i++) {
+                        for (let i = 0; i < this.state.youtube_embed_url.length; i++) {
+                            // youtube embedはmaxWidthを指定しないとスマホでははみ出すため指定。
                             items.push
                             (
-                                this.state.youtube_embed_html[i]
+                                <ReactPlayer url={this.state.youtube_embed_url[i]} controls={true} style={{maxWidth: "100%"}} />
                             )
                         }
-                        return <div dangerouslySetInnerHTML={{__html: items}}></div>
+                        return <div>{items}</div>
                     }
                 })()}
+
                 <h3>経歴</h3>
                 <h3>SNS<span role="img" aria-label="donut">👀</span></h3>
                 {(() => {
