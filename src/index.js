@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import TarentDetail from './components/TarentDetail'
 import TarentBraSize from './components/TarentBraSize'
 import TarentFace from './components/TarentFace'
+import TarentTimeline from './components/TarentTimeline'
 
 import ButtonAppBar from './components/ButtonAppBar'
 
@@ -35,6 +36,10 @@ ReactDOM.render(
         />
         <Route
             path = "/tarent_face/:id"
+            component = {TarentFace}
+        />
+        <Route
+            path = "/tarent_timeline/:tarent_id"
             component = {TarentFace}
         />
       </Switch>
