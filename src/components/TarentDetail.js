@@ -111,7 +111,7 @@ class TarentDetail extends Component{
                 </Header>
                 
                 <Project animate header={`${this.state.stage_name}のデータ`}>
-                <Image animate resources={this.state.image}></Image>
+                <Image animate resources={this.state.image}>{this.state.stage_name}</Image>
                 <Heading node='h2'>レビュー</Heading>
                 <div dangerouslySetInnerHTML={{__html: `<Words animate>${this.state.review}</Words>`}}></div>
                 <Heading node='h3'>良い点<span role="img" aria-label="donut">👍</span></Heading>
@@ -240,8 +240,7 @@ class TarentDetail extends Component{
                     }
                     return <ul>{items}</ul>;
                 })()}
-                <h3>タイムライン<span>⏱</span></h3>
-                <Link to={`/tarent_timeline/${this.state.id}`}>{this.state.tarent_stage_name}のタイムライン</Link>
+                <h3><Link to={`/tarent_timeline/${this.state.id}`}>{this.state.stage_name}のタイムライン⏱<span role="img" aria-label="donut"></span></Link></h3>
                 <h3>出演作品<span role="img" aria-label="donut">🎨</span></h3>
                 <div>
                 

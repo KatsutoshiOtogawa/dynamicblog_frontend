@@ -60,7 +60,7 @@ class TarentTimeline extends Component{
                 <h3>instagram📷</h3>
                 <h3>youtube🎬</h3>
                 <h3>この娘😘💕をもっと見👀たい、知りたい🤤</h3>
-                <Link to={`/tarent/${this.state.tarent_id}`}>小林かれんの{this.state.tarent_stage_name}データ</Link>
+                <Link to={`/tarent/${this.state.tarent_id}`}>{this.state.tarent_stage_name}のデータ</Link>
                 {(() => {
                     if(this.state.tarent_stage_name != null){
                         const items = [];
