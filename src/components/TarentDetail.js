@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import InstagramEmbed from 'react-instagram-embed';
 import ReactPlayer from 'react-player/lazy'
 import { Tweet } from 'react-twitter-widgets'
+import { Arwes,Header,Heading,Words,Image,Project,Link as ArewesLink} from 'arwes';
+
+import { Row,Col} from 'arwes';
 
 class TarentDetail extends Component{
 
@@ -22,6 +25,8 @@ class TarentDetail extends Component{
             first_rome_name: null,
             charm_point: null,
             birth_date: null,
+            image: null,
+            review: null,
             tarent_personality_id: [],
             tarent_personality_name: [],
             tarent_face_id: [],
@@ -60,6 +65,8 @@ class TarentDetail extends Component{
                 family_rome_name: data.family_rome_name,
                 first_rome_name: data.first_rome_name,
                 charm_point: data.charm_point,
+                image: data.image,
+                review: data.review,
                 birth_date: data.birth_date,
                 tarent_personality_id: data.tarent_personality_id,
                 tarent_personality_name: data.tarent_personality_name,
@@ -91,10 +98,24 @@ class TarentDetail extends Component{
     
     render(){
         return(
-            <>
-                <h2>{this.state.stage_name}</h2>
-                <h3>レビュー</h3>
-                <h4>良い点<span role="img" aria-label="donut">👍</span></h4>
+            <Arwes animate show >
+                <Header animate>
+                <Row>
+                    <Col s={8} m={4} l={4} offset={['s4',]}><Heading node='h1'>サイト名</Heading></Col>
+                    <nav>
+                        <Col s={4} m={2} l={2}><ArewesLink href='#'>タレント一覧</ArewesLink></Col>
+                        <Col s={4} m={2} l={2}><ArewesLink href='#'>おすすめ</ArewesLink></Col>
+                        <Col s={4} m={2} l={2} offset={['m2','l2']}><ArewesLink href='#'>検索</ArewesLink></Col>
+                    </nav>
+                </Row>
+                </Header>
+                
+                <Project animate header={`${this.state.stage_name}のデータ`}>
+                <Image animate resources={this.state.image}></Image>
+                <Heading node='h2'>レビュー</Heading>
+                <div dangerouslySetInnerHTML={{__html: `<Words animate>${this.state.review}</Words>`}}></div>
+                <Heading node='h3'>良い点<span role="img" aria-label="donut">👍</span></Heading>
+                <Heading node='h3'>体のデータ</Heading>
                 <h5>顔の傾向</h5>
                 {(() => {
                     const items = [];
@@ -220,7 +241,7 @@ class TarentDetail extends Component{
                     return <ul>{items}</ul>;
                 })()}
                 <h3>タイムライン<span>⏱</span></h3>
-                    <a href='https://petnanukidol.blog.fc2.com/blog-entry-70.html'>この娘のタイムライン</a>
+                <Link to={`/tarent_timeline/${this.state.id}`}>{this.state.tarent_stage_name}のタイムライン</Link>
                 <h3>出演作品<span role="img" aria-label="donut">🎨</span></h3>
                 <div>
                 
@@ -235,7 +256,8 @@ class TarentDetail extends Component{
                     return <ul>{items}</ul>;
                 })()}
                 </div>
-            </>
+                </Project>
+            </Arwes>
         );
     }
 }

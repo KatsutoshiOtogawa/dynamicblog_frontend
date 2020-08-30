@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter,Route, Switch} from 'react-router-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
@@ -12,7 +11,7 @@ import TarentDetail from './components/TarentDetail'
 import TarentBraSize from './components/TarentBraSize'
 import TarentFace from './components/TarentFace'
 import TarentTimeline from './components/TarentTimeline'
-
+import { ThemeProvider, createTheme} from 'arwes';
 import ButtonAppBar from './components/ButtonAppBar'
 
 const store = createStore(
@@ -22,8 +21,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-    <ButtonAppBar />
+    <ThemeProvider theme={createTheme()}>
     <BrowserRouter>
       <Switch>
         <Route
@@ -40,10 +38,11 @@ ReactDOM.render(
         />
         <Route
             path = "/tarent_timeline/:tarent_id"
-            component = {TarentFace}
+            component = {TarentTimeline}
         />
       </Switch>
     </BrowserRouter>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
