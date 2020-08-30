@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router-dom'
-import { Tweet } from 'react-twitter-widgets'
+import { Timeline } from 'react-twitter-widgets'
 
 class TarentTimeline extends Component{
 
@@ -51,7 +51,8 @@ class TarentTimeline extends Component{
                             // twitter のtweetIdはurlの最後になる。
                             items.push
                             (
-                                <Tweet tweetId={this.state.twitter_embed_url[i].split('/').slice(-1)[0]} />
+                                
+                                <Timeline dataSource={{ sourceType: "url", url: this.state.twitter_embed_url[i] }}/>
                             )
                         }
                         return <div>{items}</div>
