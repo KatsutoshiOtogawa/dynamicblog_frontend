@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Link } from 'react-router-dom'
 import { Timeline } from 'react-twitter-widgets'
 
+
 class TarentTimeline extends Component{
 
 
@@ -13,6 +14,7 @@ class TarentTimeline extends Component{
             twitter_embed_url: [],
             instagram_embed_url: [],
             youtube_embed_url: [],
+            niconico_embed_url: [],
         }
     }
 
@@ -35,7 +37,7 @@ class TarentTimeline extends Component{
         .catch((err) => {
             console.log(err)}
         )
-        
+
     }
     
     render(){
@@ -51,7 +53,6 @@ class TarentTimeline extends Component{
                             // twitter のtweetIdはurlの最後になる。
                             items.push
                             (
-                                
                                 <Timeline dataSource={{ sourceType: "url", url: this.state.twitter_embed_url[i] }}/>
                             )
                         }
@@ -60,6 +61,7 @@ class TarentTimeline extends Component{
                 })()}
                 <h3>instagram📷</h3>
                 <h3>youtube🎬</h3>
+                <h3>ニコニコ動画</h3>
                 <h3>この娘😘💕をもっと見👀たい、知りたい🤤</h3>
                 <Link to={`/tarent/${this.state.tarent_id}`}>{this.state.tarent_stage_name}のデータ</Link>
                 {(() => {
